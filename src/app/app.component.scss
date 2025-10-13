@@ -1,0 +1,79 @@
+.page {
+  max-width: 1040px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.elev {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.title { font-weight: 700; }
+.subtitle { opacity: 0.85; font-size: 0.95rem; }
+.spacer { flex: 1 1 auto; }
+
+.search-card {
+  margin-bottom: 16px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.full { grid-column: 1 / -1; }
+.half { width: 100%; }
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.error-card {
+  margin-top: 12px;
+}
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.results {
+  margin: 24px 0 64px;
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 16px;
+}
+
+.cards {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
+}
+
+.match .year {
+  margin-left: 6px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.synopsis, .review {
+  margin: 12px 0;
+}
+
+@media (max-width: 720px) {
+  .row-2 { grid-template-columns: 1fr; }
+}
