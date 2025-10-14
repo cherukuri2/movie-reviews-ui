@@ -63,6 +63,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "host": "0.0.0.0",
+            "port": 4200,
+            "allowedHosts": [
+              "ungifted-woodrow-technologically.ngrok-free.dev",
+              "localhost"
+            ],
+            "publicHost": "https://ungifted-woodrow-technologically.ngrok-free.dev"
+          },
           "configurations": {
             "production": {
               "buildTarget": "movie-reviews-ui:build:production"
