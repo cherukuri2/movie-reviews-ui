@@ -1,159 +1,67 @@
-🎬 Movie Reviews (AI) — Setup & Deployment Guide
-
-An AI-powered full-stack web app for generating movie reviews using Angular (UI), Spring Boot (API), and OpenAI.
-
-⚙️ 1. Local Development Setup
-🖥️ Local UI
-
-Run the Angular app locally:
-
-ng serve --proxy-config proxy.conf.json
-
-🧩 Local API
-
-Run the Spring Boot app locally:
-
-mvn spring-boot:run
-
-
-Make sure your OpenAI API Key is configured in Eclipse:
-
-Go to: OpenAI API Keys
-
-Add it as an environment variable:
-
-OPENAI_API_KEY=your_api_key_here
-
-🔄 Proxy Configuration
-
-The Angular proxy forwards UI requests to the local backend.
-
-☁️ 2. Deploy API to Render.com
-🌍 Deploy Spring Boot Service via GitHub
-
-Hosted API:
-👉 https://movie-reviews-api-geea.onrender.com
-
-Deployment dashboard:
-👉 Render Deploy Log
-
-Environment Variables:
-👉 Render Environment Variables
-
-Variable	Description
-OPENAI_API_KEY	Your OpenAI API key
-APP_PROVIDER	Default provider (e.g., openai)
-APP_MODEL	Default model (e.g., gpt-4o-mini)
-JAVA_OPTS	Optional JVM options (e.g., memory tuning)
-🧭 Local UI Connected to Render API
-
-In your Angular project, edit:
-
-// environment.ts
-export const environment = {
-  production: false,
-  apiBase: 'https://movie-reviews-api-geea.onrender.com'
-};
-
-
-Now your local UI will call the cloud API deployed on Render.
-
-⚡ 3. Run UI on StackBlitz
-
-Run Angular UI directly in StackBlitz:
-👉 StackBlitz App
-
-Connects to API hosted on Render (https://movie-reviews-api-geea.onrender.com).
-
-Pros:
-
-No need to run the UI locally.
-
-Cons:
-
-The UI is not publicly accessible — only works when logged in to the same GitHub account.
-
-🌐 4. Public Access via Ngrok
-
-Publicly expose your local Angular UI using Ngrok.
-
-🪄 Steps
-
-Sign up for Ngrok
-
-Add your auth token (via Git Bash or terminal):
-
-ngrok config add-authtoken <your_token_here>
-
-
-Run local UI:
-
-ng serve --host 0.0.0.0 --port 4200
-
-
-Start Ngrok:
-
-ngrok http 4200
-
-
-Example output:
-
-Forwarding  https://ungifted-woodrow-technologically.ngrok-free.dev -> http://localhost:4200
-
-
-Add the generated Ngrok URL (e.g. https://ungifted-woodrow-technologically.ngrok-free.dev)
-to allowed CORS domains in your Spring Boot API config.
-
-UI URL:
-👉 https://ungifted-woodrow-technologically.ngrok-free.dev
-
-Pros:
-
-Anyone can access your local UI via a public URL.
-
-Cons:
-
-UI must be running locally for Ngrok to work.
-
-🚀 5. Host Both UI & API on Cloud
-
-Make the app fully cloud-hosted and publicly accessible.
-
-🌍 Deploy UI to Netlify
-
-Add a production environment file:
-
-// environment.prod.ts
-export const environment = {
-  production: true,
-  apiBase: 'https://movie-reviews-api-geea.onrender.com'
-};
-
-
-Deploy your Angular build folder to Netlify.
-
-Netlify will generate a public URL like:
-👉 https://movie-reviews-ui.netlify.app/
-
-Add this new URL to the allowed domains in your Render API to prevent CORS issues.
-
-Pros:
-
-Fully cloud-based — accessible globally
-
-No local dependencies required
-
-✅ Summary of Deployment Options
-#	UI Location	API Location	Accessibility	Notes
-1	Local	Local	Private	Dev-only setup
-2	Local	Render	Semi-public	Useful for testing
-3	StackBlitz	Render	Limited	Only accessible to logged-in user
-4	Local (Ngrok)	Render	Public	Requires local UI running
-5	Netlify	Render	Fully public	Recommended for production/demo
-💡 Recommended Production Setup
-Component	Platform	URL
-UI	Netlify	https://movie-reviews-ui.netlify.app/
-
-API	Render	https://movie-reviews-api-geea.onrender.com
-
-AI Provider	OpenAI	https://platform.openai.com
+Following are different ways this application can be used.
+
+1.
+	Local UI
+	Local API
+	Proxy Conf
+	Open API Key in ENV variables in Eclipse	[https://platform.openai.com/settings/organization/api-keys]
+
+
+2.
+	Deploy service to Render.com (through Github)	[https://movie-reviews-api-geea.onrender.com]
+		https://dashboard.render.com/web/srv-d3mhjfmr433s73al4a1g/deploys/dep-d3n8atd6ubrc73b729d0
+	Add Environment variables in Render.com
+		https://dashboard.render.com/web/srv-d3mhjfmr433s73al4a1g/env
+	
+	Local UI
+	Create environment.ts file and add the service URL 
+		export const environment = {
+		  production: false,
+		  apiBase: 'https://movie-reviews-api-geea.onrender.com'
+		};
+	Connect Local UI to service in Render.com	[OPENAI_API_KEY, APP_MODEL, APP_PROVIDER, JAVA_OPTS]
+	
+3. Run the UI through stackblitz and point to Render.com URL 'https://movie-reviews-api-geea.onrender.com'
+	Stackblitz UI: https://moviereviewsui-oyuh--4200--96435430.local-credentialless.webcontainer.io/
+	
+	Pros: Local UI does not need to run
+	Cons: UI is not accessible for all public. It is accessible on machine where Github is logged-in.
+	
+
+4. // Making UI accessible for public [https://ungifted-woodrow-technologically.ngrok-free.dev]
+
+	Signup for ngrok and configure security key through Git Bash
+	Run local UI using command 'ng serve --host 0.0.0.0 --port 4200'
+	Run 'ngrok http 4200' // This will generate a URL which will internally access the http://localhost:4200
+	Add the generated UI URL to be 'allowable domains' in API configuration to avoid CORS error. If changes are pushed to Github, Render.com will auto deploy in 2-3 minutes.
+	
+	UI: https://ungifted-woodrow-technologically.ngrok-free.dev
+	
+	
+	Pros: Anyone can access the new URL genetad by ngrok.
+	Cons: UI app still needs to be running on the local.
+	
+		$ ngrok http 4200
+			ngrok                                                                                                                                                       (Ctrl+C to quit)
+
+			?  Using ngrok for OSS? Request a community license: https://ngrok.com/r/oss
+
+			Session Status                online
+			Account                       Rajasekhar Cherukuri (Plan: Free)
+			Version                       3.30.0
+			Region                        United States (us)
+			Latency                       17ms
+			Web Interface                 http://127.0.0.1:4040
+			Forwarding                    https://ungifted-woodrow-technologically.ngrok-free.dev -> http://localhost:4200
+			
+			
+
+5. // Making UI and API completely on Cloud AND accessible for public [https://movie-reviews-ui.netlify.app/]
+
+	Add environment.prod.ts file with the Render.com base URL
+	Use 'netlify.com' to deploy the UI
+	New UI URL is generated and accessible for all: https://movie-reviews-ui.netlify.app/
+	Add this new URL to the 'allowed domains' in API. If changes are pushed to Github, Render.com will auto deploy in 2-3 minutes.
+	
+	Pros: The UI is accessible everywhere.
+	
