@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBase: ''
+  apiBase: 'https://movie-reviews-api-geea.onrender.com'
 };
