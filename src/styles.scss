@@ -1,4 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
+/* Palettes */
+$primary: mat.m2-define-palette(mat.$m2-indigo-palette, A400, A200, A700);
+$accent:  mat.m2-define-palette(mat.$m2-pink-palette,   A200, A100, A400);
+$warn:    mat.m2-define-palette(mat.$m2-deep-orange-palette);
+
+$primary-dark: mat.m2-define-palette(mat.$m2-deep-purple-palette, A200, A100, A400);
+$accent-dark:  mat.m2-define-palette(mat.$m2-light-blue-palette,  A200, A100, A400);
+
+/* Themes (no custom typography yet to keep it simple) */
+$theme-light: mat.m2-define-light-theme((
+  color: (primary: $primary, accent: $accent, warn: $warn),
+  density: 0
+));
+
+$theme-dark: mat.m2-define-dark-theme((
+  color: (primary: $primary-dark, accent: $accent-dark, warn: $warn)
+));
+
+/* Emit WITHOUT duplication: colors + type + densities for light, colors+type for dark */
+@include mat.all-component-typographies($theme-light);
+@include mat.all-component-colors($theme-light);
+@include mat.all-component-densities($theme-light);  // <-- plural!
+
+.dark-theme {
+  @include mat.all-component-typographies($theme-dark);
+  @include mat.all-component-colors($theme-dark);
+}
+
+/* --- your extra styles --- */
+:root { --radius: 14px; --shadow-1: 0 6px 20px rgba(0,0,0,.08); }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at -10% -10%, #f7f0ff 0%, transparent 60%),
+    radial-gradient(1000px 500px at 110% -10%, #fff2f7 0%, transparent 60%),
+    radial-gradient(900px 480px at 50% 120%, #f0f9ff 0%, transparent 60%),
+    #ffffff;
+}
+.app-toolbar.mat-toolbar {
+  background: linear-gradient(90deg, #5c6bc0, #ec407a, #42a5f5);
+  background-size: 200% 200%;
+  animation: toolbarGradient 16s ease infinite;
+  color: #fff;
+  box-shadow: var(--shadow-1);
+}
+@keyframes toolbarGradient {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+.mat-mdc-card { border-radius: var(--radius) !important; box-shadow: var(--shadow-1); overflow: hidden; }
+.mdc-button--raised { border-radius: 999px !important; font-weight: 600; letter-spacing: .2px; }
+.mdc-evolution-chip { border-radius: 999px !important; }
+.mat-mdc-form-field { border-radius: var(--radius); }
+.cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 600px) { .cards { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 992px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }

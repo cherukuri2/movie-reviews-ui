@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReviewService } from './review.service';
 import { ReviewResponse } from './models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,11 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Movie Reviews (AI)';
   result?: ReviewResponse;
   error?: string;
   form: FormGroup;
+  isDark = true;
 
   constructor(private fb: FormBuilder, public svc: ReviewService) {
     this.form = this.fb.group({
@@ -20,6 +21,17 @@ export class AppComponent {
       provider: ['openai'],
       model: ['gpt-4o-mini']
     });
+  }
+  ngOnInit(): void {
+    const saved = localStorage.getItem('prefers-dark');
+    this.isDark = saved === 'true';
+    document.body.classList.toggle('dark-theme', this.isDark);
+  }
+
+  toggleTheme() {
+    this.isDark = !this.isDark;
+    document.body.classList.toggle('dark-theme', this.isDark);
+    localStorage.setItem('prefers-dark', String(this.isDark));
   }
 
   submit() {
