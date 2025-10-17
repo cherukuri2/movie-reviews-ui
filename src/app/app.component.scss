@@ -1,23 +1,44 @@
+/* Toolbar */
+.app-toolbar {
+  .mat-toolbar-row {
+    align-items: center;
+  }
+
+  .title {
+    font-weight: 600;
+    white-space: normal;      /* allow wrapping */
+    overflow-wrap: anywhere;  /* break long copyright names if needed */
+    line-height: 1.25;
+  }
+
+  .subrow {
+    padding-top: 0;
+    .subtitle {
+      opacity: .95;
+      font-size: 0.95rem;
+      white-space: normal;     /* allow wrapping */
+      line-height: 1.25;
+    }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+/* Page container */
 .page {
-  max-width: 1040px;
-  margin: 24px auto;
-  padding: 0 16px;
+  max-width: 980px;
+  margin: 1rem auto 2.5rem auto; /* extra bottom space for mobile safe-area */
+  padding: 0 1rem;
 }
 
-.elev {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.title { font-weight: 700; }
-.subtitle { opacity: 0.85; font-size: 0.95rem; }
-.spacer { flex: 1 1 auto; }
-
+/* Search card layout */
 .search-card {
-  margin-bottom: 16px;
+  display: block;
 }
 
+/* Form grid */
 .form-grid {
   display: grid;
   gap: 16px;
@@ -29,51 +50,77 @@
   gap: 16px;
 }
 
-.full { grid-column: 1 / -1; }
 .half { width: 100%; }
+.full { grid-column: 1 / -1; }
 
+/* Search button improvements (mobile Chrome friendly) */
 .submit-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 16px;    /* ensures visible bottom space */
+  display: inline-flex;   /* keeps ripple/ink behavior correct */
+  width: 100%;            /* full-width on small screens (overridden on desktop) */
+  justify-content: center;
 }
 
-.error-card {
-  margin-top: 12px;
-}
-.error-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+/* Results */
 .results {
-  margin: 24px 0 64px;
+  margin-top: 16px;
 }
 
 .results-header {
   display: flex;
   align-items: center;
+  gap: 12px;
   justify-content: space-between;
-  margin: 8px 0 16px;
+  flex-wrap: wrap;
 }
 
 .cards {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 16px;
-  grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
 }
 
-.match .year {
-  margin-left: 6px;
-  opacity: 0.8;
-  font-weight: 500;
+.match .year { opacity: .85; }
+
+/* Error card content alignment */
+.error-card .error-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.synopsis, .review {
-  margin: 12px 0;
+/* --------- Responsive tweaks --------- */
+
+/* Small screens */
+@media (max-width: 599px) {
+  .title {
+    font-size: 1rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  .row-2 {
+    grid-template-columns: 1fr; /* stack provider/model fields */
+  }
+  .submit-btn {
+    width: 100%;  /* full-width button on phones */
+  }
 }
 
-@media (max-width: 720px) {
-  .row-2 { grid-template-columns: 1fr; }
+/* Medium+ screens */
+@media (min-width: 600px) {
+  .submit-btn {
+    width: auto; /* go back to natural width on larger screens */
+  }
+  .cards {
+    grid-template-columns: 1fr 1fr; /* two columns for results */
+  }
+}
+
+/* Large screens */
+@media (min-width: 992px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr; /* three columns on wide displays */
+  }
 }
