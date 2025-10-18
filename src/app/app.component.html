@@ -41,6 +41,7 @@
         </mat-form-field>
 
         <div class="row-2">
+          <!--
           <mat-form-field appearance="outline" class="half">
             <mat-label>Provider</mat-label>
             <mat-select formControlName="provider">
@@ -53,18 +54,20 @@
             <mat-label>Model</mat-label>
             <input matInput formControlName="model" placeholder="gpt-4o-mini or llama3.1" />
           </mat-form-field>
+        -->
         </div>
-
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          class="submit-btn"
-          [disabled]="svc.loading || form.invalid"
-          matTooltip="Search and generate reviews">
-          <mat-icon>search</mat-icon>
-          <span>Search & Review</span>
-        </button>
+        <div class="submit-row">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="submit-btn"
+            [disabled]="svc.loading || form.invalid"
+            matTooltip="Search and generate reviews">
+            <mat-icon>search</mat-icon>
+            <span>Search & Review</span>
+          </button>
+        </div>
       </form>
 
       <mat-progress-bar *ngIf="svc.loading" mode="indeterminate"></mat-progress-bar>

@@ -77,3 +77,54 @@
 @media (max-width: 720px) {
   .row-2 { grid-template-columns: 1fr; }
 }
+
+
+/* Make the title wrap correctly */
+.app-toolbar .title {
+  white-space: normal !important;      /* allow text to wrap */
+  overflow-wrap: anywhere;             /* break long words if needed */
+  flex: 1 1 auto;                      /* allow title to shrink and grow */
+  line-height: 1.3;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-right: 0.5rem;
+}
+
+/* Ensure toolbar rows handle wrapping on small screens */
+.app-toolbar .mat-toolbar-row {
+  flex-wrap: wrap;                     /* let content wrap to next line */
+  align-items: center;
+}
+
+/* Make toolbar button align to top on wrap */
+.app-toolbar button[mat-icon-button] {
+  flex-shrink: 0;
+}
+
+/* Subtitle row tweaks */
+.app-toolbar .subrow .subtitle {
+  white-space: normal;
+  text-align: center;
+  width: 100%;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.submit-row {
+  padding-bottom: 16px; /* padding avoids margin collapse entirely */
+}
+.submit-btn {
+  width: 100%;           /* nice for mobile; remove if not desired */
+  margin-top: 8px;
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .app-toolbar .title {
+    font-size: 0.9rem;
+  }
+  .app-toolbar .subtitle {
+    font-size: 0.85rem;
+  }
+}
