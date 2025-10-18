@@ -118,6 +118,47 @@
   margin-top: 8px;
 }
 
+/* Let the title wrap AND be bigger */
+.app-toolbar .mat-toolbar-row {
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 56px; /* keeps good touch target height */
+}
+
+.app-toolbar .title {
+  /* responsive, wraps nicely, breaks long words if needed */
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  flex: 1 1 auto;
+  margin-right: .5rem;
+
+  /* Bigger title size: min 1.2rem, scales up with viewport, caps at 1.6rem */
+  font-size: clamp(1.2rem, 2.5vw + 0.6rem, 1.6rem);
+}
+
+/* Keep subtitle readable but secondary */
+.app-toolbar .subrow .subtitle {
+  white-space: normal;
+  text-align: center;
+  width: 100%;
+  opacity: .9;
+  /* min 0.95rem, scales a bit, caps at 1.1rem */
+  font-size: clamp(.95rem, 1.5vw + .6rem, 1.1rem);
+}
+
+/* Prevent the icon from stealing space */
+.app-toolbar button[mat-icon-button] {
+  flex-shrink: 0;
+}
+
+/* Optional: give the toolbar rows a little breathing room on very small phones */
+@media (max-width: 360px) {
+  .app-toolbar .mat-toolbar-row { gap: .25rem; }
+}
+
+
 
 /* Mobile responsiveness */
 @media (max-width: 600px) {
