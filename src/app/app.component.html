@@ -1,15 +1,26 @@
 <mat-toolbar color="primary" class="elev app-toolbar">
   <mat-toolbar-row>
-    <span class="title">🎬 Movie Reviews (AI) — © Rajasekhar Cherukuri</span>
+    <span class="title">
+      🎬 Movie Reviews (AI)
+      <span class="mobile-break"><br></span>
+      — © Rajasekhar Cherukuri
+    </span>
+
     <span class="spacer"></span>
-    <button mat-icon-button aria-label="Toggle theme" (click)="toggleTheme()">
+    <button
+      mat-icon-button
+      aria-label="Toggle theme"
+      class="theme-toggle"
+      (click)="toggleTheme()">
       <mat-icon>dark_mode</mat-icon>
     </button>
   </mat-toolbar-row>
+
   <mat-toolbar-row class="subrow">
     <span class="subtitle">Find the film • Get a quick review</span>
   </mat-toolbar-row>
 </mat-toolbar>
+
 
 
 

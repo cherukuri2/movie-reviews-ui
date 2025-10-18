@@ -92,7 +92,7 @@
 
 /* Ensure toolbar rows handle wrapping on small screens */
 .app-toolbar .mat-toolbar-row {
-  flex-wrap: wrap;                     /* let content wrap to next line */
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -118,54 +118,50 @@
   margin-top: 8px;
 }
 
-/* Let the title wrap AND be bigger */
+/* Let rows wrap and keep alignment */
 .app-toolbar .mat-toolbar-row {
   flex-wrap: wrap;
   align-items: center;
-  min-height: 56px; /* keeps good touch target height */
 }
 
+/* Title: allow wrapping and scale responsively */
 .app-toolbar .title {
-  /* responsive, wraps nicely, breaks long words if needed */
-  font-weight: 700;
-  line-height: 1.25;
   white-space: normal !important;
   overflow-wrap: anywhere;
   flex: 1 1 auto;
-  margin-right: .5rem;
-
-  /* Bigger title size: min 1.2rem, scales up with viewport, caps at 1.6rem */
-  font-size: clamp(1.2rem, 2.5vw + 0.6rem, 1.6rem);
+  line-height: 1.25;
+  font-weight: 800;                 /* heavier for better legibility */
+  font-size: clamp(1.25rem, 2.2vw + 0.7rem, 1.7rem);
 }
 
-/* Keep subtitle readable but secondary */
+/* Subtitle stays secondary but readable */
 .app-toolbar .subrow .subtitle {
   white-space: normal;
   text-align: center;
   width: 100%;
   opacity: .9;
-  /* min 0.95rem, scales a bit, caps at 1.1rem */
-  font-size: clamp(.95rem, 1.5vw + .6rem, 1.1rem);
+  font-size: clamp(1rem, 1.2vw + .7rem, 1.1rem);
 }
 
-/* Prevent the icon from stealing space */
-.app-toolbar button[mat-icon-button] {
-  flex-shrink: 0;
-}
+/* Prevent icon from shrinking text area on large screens */
+.app-toolbar .theme-toggle { flex-shrink: 0; }
 
-/* Optional: give the toolbar rows a little breathing room on very small phones */
-@media (max-width: 360px) {
-  .app-toolbar .mat-toolbar-row { gap: .25rem; }
-}
-
-
-
-/* Mobile responsiveness */
+/* ----- Mobile overrides ----- */
 @media (max-width: 600px) {
+  /* Make the title clearly larger on phones */
   .app-toolbar .title {
-    font-size: 0.9rem;
+    font-size: 1.55rem !important;  /* force a larger size on small screens */
+    letter-spacing: .1px;
   }
-  .app-toolbar .subtitle {
-    font-size: 0.85rem;
+
+  /* Hide the moon icon on mobile */
+  .app-toolbar .theme-toggle {
+    display: none !important;
   }
 }
+
+.mobile-break { display: none; }
+@media (max-width: 600px) {
+  .mobile-break { display: inline; }
+}
+
